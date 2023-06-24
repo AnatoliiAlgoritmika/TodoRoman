@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .cards {
+            padding: 40px;
+            width: 100%;
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+        }
+        .card {
+            width: 300px;
+            height: 400px;
+            border: 2px solid #ff11;
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 15px;
+        }
+        .card img{
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    hello Anatolii
+
+    <a href="{% url 'logoutuser' %}">Выйти</a>
+    <a href="{% url 'createtodo' %}">Создать задачу</a>
+
+
+    <div class="cards">
+        {% for item in todos %}
+            <a href="{% url 'showtodo' item.id %}" target="_blank">
+                <div class="card">
+                    {% if item.img.url == '/media/null' %}
+                    <img src="{% static 'images/djangoproject.ico' %}" alt=""> 
+                    {% else %}
+                    <img src="{{ item.img.url }}" alt="">
+                    {% endif %}
+                    <h2>{{ item.title }}</h2>
+                    <h3>{{ item.description }}</h3>
+                </div>
+            </a>
+        {% endfor %} 
+    </div>
+</body>
+</html>
